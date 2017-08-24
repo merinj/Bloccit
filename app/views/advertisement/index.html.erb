@@ -1,0 +1,10 @@
+<h1>All Advertisements</h1>
+<% @advertisements.each do |adver| %>
+  <div class="media">
+  	<div class="media-body">
+  		<h4 class="media-heading">
+  			<%= link_to adver.title %>
+  		</h4>
+  	</div>
+  </div>			
+<% end %>  
