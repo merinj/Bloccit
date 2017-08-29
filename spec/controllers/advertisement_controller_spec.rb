@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AdvertisementController, type: :controller do
 
-  let(:my_ad) { Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 99)}
+  let(:my_ad) { Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 78)}
 
   describe "GET #index" do
     it "returns http success" do
@@ -17,11 +17,6 @@ RSpec.describe AdvertisementController, type: :controller do
   end
 
   describe "GET #show" do
-    it "returns http success" do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-
     it "returns http success" do
       get :show, params: { id: my_ad.id }
       expect(response).to have_http_status(:success)
@@ -55,11 +50,8 @@ RSpec.describe AdvertisementController, type: :controller do
     end      
   end
 
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
-      expect(response).to have_http_status(:success)
-    end
+  describe "POST #create" do
+   
   end
 
 end
