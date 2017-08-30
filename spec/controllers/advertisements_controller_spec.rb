@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AdvertisementController, type: :controller do
+RSpec.describe AdvertisementsController, type: :controller do
 
   let(:my_ad) { Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 78)}
 
@@ -51,7 +51,35 @@ RSpec.describe AdvertisementController, type: :controller do
   end
 
   describe "POST #create" do
-   
+    
+    it "increases the number of Advertisement by 1" do
+      expect { 
+        post :create, params: { 
+          advertisement: { 
+            title: RandomData.random_sentence, 
+            copy: RandomData.random_paragraph,
+            price: 99
+          }
+        }
+      }.to change(Advertisement, :count).by(1)
+    end
+    
+    it "assigns the new advertisement to @advertisement" do
+      post :create, params: { advertisement: { title: RandomData.random_sentence, copy: RandomData.random_paragraph } }
+      expect(assigns(:advertisement)).to eq Advertisement.last
+    end 
+
+    it "redirects to the show action" do
+      post :create, params: { advertisement: { title: RandomData.random_sentence, copy: RandomData.random_paragraph } }
+      expect(response).to redirect_to(Advertisement.last)
+    end 
+
+    context "when the advertisement does not have a title" do
+      it "renders the new template" do
+        post :create, params: { advertisement: { copy: RandomData.random_paragraph } }
+        expect(response).to render_template(:new)
+      end
+    end
   end
 
 end
