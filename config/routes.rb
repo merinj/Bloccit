@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :questions
   resources :advertisement
 
   resources :posts
